@@ -43,7 +43,6 @@ DB_CONN = 'redis://127.0.0.1:6379/0'
 # proxy table name
 TABLE_NAME = 'use_proxy'
 
-
 # ###### config the proxy fetch function ######
 PROXY_FETCHER = [
     "freeProxy01",
@@ -56,7 +55,8 @@ PROXY_FETCHER = [
     "freeProxy08",
     "freeProxy09",
     "freeProxy10",
-    "freeProxy11"
+    "freeProxy11",
+    "textProxy"
 ]
 
 # ############# proxy validator #################

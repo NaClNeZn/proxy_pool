@@ -231,6 +231,21 @@ class ProxyFetcher(object):
     #         proxies = re.findall(r'<td>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})</td>[\s\S]*?<td>(\d+)</td>', r.text)
     #         for proxy in proxies:
     #             yield ':'.join(proxy)
+    @staticmethod
+    def textProxy():
+        proxies: []
+        with open('proxy.txt', 'r', encoding='utf-8') as f:
+            if f.read() == "":
+                # 如果文件为空，就不执行
+                print("proxy.txt中无代理")
+                return
+        # 确保每个proxy都是 host:ip正确的格式返回
+        with open('proxy.txt', 'r', encoding='utf-8') as f:
+            proxies = [line.strip() for line in f.readlines()]
+        # 去重
+        proxies = list(set(proxies))
+        for proxy in proxies:
+            yield proxy
 
 
 if __name__ == '__main__':
