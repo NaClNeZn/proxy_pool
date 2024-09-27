@@ -240,8 +240,9 @@ class ProxyFetcher(object):
 
         # 使用 pathlib.Path.rglob 递归查找文件
         directory_path = Path('../textProxy')
+        print('directory_path', directory_path)
         file_list = [str(f) for f in directory_path.rglob('*.txt')]
-
+        print('file_list', file_list)
         # 检查文件是否为空，并收集非空文件中的代理
         for file in file_list:
             with open(file, 'r', encoding='utf-8') as f:
@@ -255,7 +256,7 @@ class ProxyFetcher(object):
 
         # 去重
         proxies = list(set(proxies))
-
+        print('proxies', proxies)
         # 返回每个代理服务器
         for proxy in proxies:
             yield proxy
