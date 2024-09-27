@@ -239,7 +239,7 @@ class ProxyFetcher(object):
         proxies = []
 
         # 使用 pathlib.Path.rglob 递归查找文件
-        directory_path = Path('../textProxy')
+        directory_path = Path('textProxy')
         print('directory_path', directory_path)
         file_list = [str(f) for f in directory_path.rglob('*.txt')]
         print('file_list', file_list)
@@ -264,7 +264,7 @@ class ProxyFetcher(object):
 
 if __name__ == '__main__':
     p = ProxyFetcher()
-    for _ in p.freeProxy06():
+    for _ in p.textProxy():
         print(_)
 
 # http://nntime.com/proxy-list-01.htm
