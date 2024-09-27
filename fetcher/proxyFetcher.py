@@ -15,6 +15,8 @@ __author__ = 'JHao'
 import re
 import json
 from time import sleep
+import os
+from pathlib import Path
 
 from util.webRequest import WebRequest
 
@@ -233,17 +235,28 @@ class ProxyFetcher(object):
     #             yield ':'.join(proxy)
     @staticmethod
     def textProxy():
-        proxies: []
-        with open('proxy.txt', 'r', encoding='utf-8') as f:
-            if f.read() == "":
-                # 如果文件为空，就不执行
-                print("proxy.txt中无代理")
-                return
-        # 确保每个proxy都是 host:ip正确的格式返回
-        with open('proxy.txt', 'r', encoding='utf-8') as f:
-            proxies = [line.strip() for line in f.readlines()]
+        # 初始化代理列表
+        proxies = []
+
+        # 使用 pathlib.Path.rglob 递归查找文件
+        directory_path = Path('../textProxy')
+        file_list = [str(f) for f in directory_path.rglob('*.txt')]
+
+        # 检查文件是否为空，并收集非空文件中的代理
+        for file in file_list:
+            with open(file, 'r', encoding='utf-8') as f:
+                content = f.read()
+                if content == "":
+                    # 如果文件为空，就跳过这个文件
+                    continue
+
+                # 读取非空文件中的代理
+                proxies.extend(line.strip() for line in content.splitlines())
+
         # 去重
         proxies = list(set(proxies))
+
+        # 返回每个代理服务器
         for proxy in proxies:
             yield proxy
 
