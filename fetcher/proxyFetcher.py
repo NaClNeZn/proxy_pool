@@ -240,11 +240,12 @@ class ProxyFetcher(object):
 
         # 使用 pathlib.Path.rglob 递归查找文件
         directory_path = Path('textProxy')
-        print('directory_path', directory_path)
         file_list = [str(f) for f in directory_path.rglob('*.txt')]
-        print('file_list', file_list)
+        # 按文件名倒序排列(文件名是yyyy-mm-DD)
+        file_list_sorted = sorted(file_list, key=lambda x: Path(x).name, reverse=True)
+
         # 检查文件是否为空，并收集非空文件中的代理
-        for file in file_list:
+        for file in file_list_sorted:
             with open(file, 'r', encoding='utf-8') as f:
                 content = f.read()
                 if content == "":
