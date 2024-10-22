@@ -78,8 +78,10 @@ def run():
                 time.sleep(sleep_time)
             except requests.RequestException as e:
                 print(f"代理连接超时或请求错误: {e}")
+                break
             except Exception as e:
                 print(f"意外错误: {e}")
+                break
         requests.get(deleteproxy.format(resp))
     print("无可用代理")
 
